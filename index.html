@@ -20,6 +20,8 @@
     <!-- Custom styles for this template -->
     <link href="dashboard.css" rel="stylesheet">
 
+    <link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet">
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="./assets/js/ie-emulation-modes-warning.js"></script>
@@ -46,7 +48,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">修改密码</a></li>
+            <li><a href="./login.html">修改密码</a></li>
             <li><a href="#">退出</a></li>
           </ul>
         </div>
@@ -57,11 +59,49 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="#">上传业绩表<span class="sr-only">(current)</span></a></li>
           </ul>
         </div>
+
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Dashboard</h1>
+          <h1 class="page-header">上传业绩表</h1>
+
+          <div class="container" style="padding:40px 0px;">
+            <form class="form-horizontal" role="form">
+               <div class="form-group">
+                  <label for="name" class ="control-label col-sm-3">选择日期</label>
+              <div class="col-sm-5">
+                  <span class="fontawesome-calendar"></span>
+                  <input type="name" name="myDate" class="form-control monthYearPicker" />
+              </div>
+                </div>
+               <div class="form-group">
+                  <label for="address" class ="control-label col-sm-3">上传文件</label>
+              <div class="col-sm-3">
+                  <input class="form-control file-chooser__input" type="file">
+              </div>
+                </div>
+               <div class="form-group">
+                  <label for="email" class ="control-label col-sm-3">发送邮箱</label>
+              <div class="col-sm-5">
+                  <input type="email" class="form-control" id="email" placeholder="Enter email">
+              </div>
+                </div>
+               <div class="form-group">
+                  <label for="pwd" class ="control-label col-sm-3">邮箱密码</label>
+              <div class="col-sm-5">
+                  <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+              </div>
+                </div>
+               <div class="col-sm-offset-2 col-sm-8">
+                 <button type="submit" class="btn btn-default">保存</button>
+                 <button type="submit" class="btn btn-default">发送</button>
+               </div>
+            </form>
+          </div>
+
+          <label for="myDate">Date :</label>
+          <input name="myDate" class="monthYearPicker" />
 
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder">
@@ -222,11 +262,38 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
     <script>window.jQuery || document.write('<script src="./assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="./dist/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="./assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script>
+      $(function() {
+  $('.monthYearPicker').datepicker({
+    changeMonth: true,
+    changeYear: true,
+    dateFormat: 'mm/yy',
+    monthNamesShort : [ "01", "02", "03", "04", "05", "06", "07", "08", "09","10", "11", "12" ]
+  }).focus(function() {
+    var thisCalendar = $(this);
+    $('.ui-datepicker-calendar').detach();
+    $('.ui-datepicker-close').click(function() {
+var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+thisCalendar.datepicker('setDate', new Date(year, month, 1));
+      alert( "Handler for .change() called." );
+    });
+    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+    thisCalendar.datepicker('setDate', new Date(year, month, 1));
+    
+//     $("#ui-datepicker-div .ui-datepicker-month").change(function() {
+//   alert( "Handler for .change() called." );
+// })
+  });
+});
+    </script>
   </body>
 </html>

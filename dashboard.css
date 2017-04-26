@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:900,300);
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
 /*
  * Base structure
  */
@@ -102,4 +104,27 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+.ui-datepicker-calendar {
+    display: none;
+ }
+
+ [class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+.fontawesome-calendar {
+  position: absolute;
+  right: 20px;
+  font-size: 24px;
+  z-index: -99;
+}
+
+.monthYearPicker {
+  background-color: transparent;
+}
+
+.ui-datepicker .ui-datepicker-header {
+  margin: 0.3em 0;
 }
