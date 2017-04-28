@@ -48,8 +48,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="./login.html">修改密码</a></li>
-            <li><a href="#">退出</a></li>
+            <li><a id="login_link" class="login_link">登录</a></li>
+            <li><a href="./login.html" class="login_suc hidden">修改密码</a></li>
+            <li><a href="#" class="login_suc hidden">退出</a></li>
           </ul>
         </div>
       </div>
@@ -67,7 +68,7 @@
           <h1 class="page-header">上传业绩表</h1>
 
           <div class="container" style="padding:40px 0px;">
-            <form class="form-horizontal" role="form">
+            <div class="form-horizontal" role="form" >
                <div class="form-group">
                   <label for="name" class ="control-label col-sm-3">选择日期</label>
               <div class="col-sm-5">
@@ -78,7 +79,7 @@
                <div class="form-group">
                   <label for="address" class ="control-label col-sm-3">上传文件</label>
               <div class="col-sm-3">
-                  <input class="form-control file-chooser__input" type="file">
+                  <input name="fileUpload" id="fileUpload" class="form-control file-chooser__input" type="file">
               </div>
                 </div>
                <div class="form-group">
@@ -94,10 +95,11 @@
               </div>
                 </div>
                <div class="col-sm-offset-2 col-sm-8">
-                 <button type="submit" class="btn btn-default">保存</button>
-                 <button type="submit" class="btn btn-default">发送</button>
+                 <button class="btn btn-default" id="save">保存</button>
+                 <button class="btn btn-default" id="browse">浏览</button>
+                 <button class="btn btn-default"  id="submit">发送</button>
                </div>
-            </form>
+            </div>
           </div>
 
           <label for="myDate">Date :</label>
@@ -258,6 +260,26 @@
       </div>
     </div>
 
+    <div>
+      <div class="overlay" id="overlay">
+        <div class="popup">
+          <h1>金兜财富</h1>
+          <div id="form" class="login_form">
+            <div id="login_msg" class="error_msg"></div>
+            <div class="login_row ">
+              <span class="icon_user"></span>
+              <input type="text" value="" id="login_name" class="login_input name" placeholder="请输入账号"></div>
+            <div class="error_msg"></div>
+            <div class="login_row">
+              <span class="icon_pass"></span>
+              <input type="password" value="" id="login_password" class="login_input password" placeholder="请输入密码"></div>
+            <div class="error_msg"></div>
+            <input id="login_submit" type="button" class="login_submit" value="登录">
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -294,6 +316,126 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 // })
   });
 });
+      $(document).ready(function(){
+        var token = localStorage.getItem("token")
+        if (token) {
+          $("#overlay").css("display", "none")
+          $("#login_link").parent().css("display", "none")
+          $(".login_suc").removeClass( "hidden" )
+        }
+        $("#overlay").click(function(e){
+          e.preventDefault()
+          e.stopPropagation()
+          if (e.target.id === 'overlay') {
+            $(this).css("display", "none")
+          }
+        })
+
+        $("#login_submit").click(function(){
+          var sName = $("#login_name").val()
+          var sPassword = $("#login_password").val()
+          var count = 0
+          if (!sName) {
+            var row = $("#login_name").parent()
+            row.css("border", "1px solid #ff4d4d")
+            $("#login_msg").html("请输入账号")
+            count++
+          }
+          if (!sPassword) {
+            var row = $("#login_password").parent()
+            row.css("border", "1px solid #ff4d4d")
+            $("#login_msg").html("请输入密码")
+            count++
+          }
+          if (count > 0) {
+            return;
+          }
+          var formData = {'name': sName, 'password': sPassword};
+          $('.loader').css("display", "block");
+          var that = this
+          var url = 'http://yintechjdhr.jdcf88.com/H5_server/api/User/UserLogin2?name=' + sName + '&pwd=' + sPassword
+          $.ajax({    
+            url: url,   
+            type: 'get',
+            cache: false,    
+            success: function(data) {
+              if (data.success && data.data) {
+                var oData = data.data
+                localStorage.setItem("name", oData.name)
+                localStorage.setItem("token", oData.token)
+                $("#overlay").css("display", "none")
+                $("#login_link").parent().css("display", "none")
+                $(".login_suc").removeClass( "hidden" )
+              }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              $("#login_msg").html(thrownError)
+            }    
+          })
+        })
+
+        $(".login_input").blur(function(){
+          $("#login_msg").html("")
+          $(".login_row").css("border", "1px solid #c5cddb")
+        })
+
+        $("#login_link").on('click', function(event) {
+            event.preventDefault();
+            $("#overlay").css("display", "")
+        })
+
+        $("#save").click(function(evt){
+          evt.preventDefault();
+          var sDate = "04/2017"
+          var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/Excel/savefile?datetime=2017/04'
+          var formData = new FormData();
+          formData.append('file', $('#fileUpload')[0].files[0]);
+          $.ajax({
+              url: sUrl,
+              type: 'POST',
+              cache: false,
+              data: formData,
+              processData: false,
+              contentType: false
+          }).done(function(res) {
+            alert(res)
+          }).fail(function(res) {
+            alert(res)
+          });
+        })
+
+        $("#submit").click(function(evt){
+          evt.preventDefault();
+          var sDate = "04/2017"
+          var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/SendEmail/send?token='+ localStorage.getItem('token') + '&emailAcount=huangxbd1990@126.com&emailPassword=Initial1'
+          $.ajax({
+              url: sUrl,
+              type: 'get',
+          }).done(function(res) {
+            alert(res)
+          }).fail(function(res) {
+            alert(res)
+          });
+        })
+
+        $("#browse").click(function(evt){
+          evt.preventDefault();
+          var sDate = "04/2017"
+          var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/SendEmail/GetPromoteList?token='+ localStorage.getItem('token')
+          var formData = {'pageIndex': '0', 'pageSize': '10'};
+          $.ajax({
+              url: sUrl,
+              type: 'POST',
+              data: formData
+          }).done(function(res) {
+            alert(res)
+          }).fail(function(res) {
+            alert(res)
+          });
+        })
+
+      })
+
     </script>
   </body>
 </html>
