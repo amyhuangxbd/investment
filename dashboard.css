@@ -125,7 +125,7 @@ body {
 }
 
 .ui-datepicker .ui-datepicker-header {
-  margin: 0.3em 0;
+  margin: 0.58em 0;
 }
 
 .overlay {
@@ -285,4 +285,98 @@ body {
 
 .navbar-nav li a.hidden {
   display: none;
+}
+
+.overlay .popup_table {
+  margin-top: 100px;
+  width: 92%;
+  min-width: 560px;
+}
+
+.form-horizontal .has-error .control-label,
+.form-horizontal .has-error .help-block,
+.form-horizontal .has-error .form-control-feedback {
+    color: #f39c12;
+}
+
+
+.loader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  opacity: 0.6;
+  margin: 0 0 2em;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  display: none;
+}
+svg {
+    margin-top: 200px;
+}
+svg path,
+svg rect{
+  fill: #FF6700;
+}
+
+.alertTip {
+  display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100000;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.alertText {
+    width: 300px;
+    height: 300px;
+    margin-top: calc(100vh / 2 - 120px);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    padding-top: 24px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.alertText .alert_icon {
+    margin: 0 auto 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #5cb85c
+}
+
+.alertText .alert_icon span {
+    height: 80px;
+    line-height: 80px;
+    display: inline-block;
+    font-size: 3em;
+}
+
+.alertText .alert_icon.error {
+    background-color: #f33;
+}
+
+.alertText h3 {
+    font-size: 28px;
+    color: #5cb85c;
+    text-align: center
+}
+
+.alertText h3.error {
+    color: #f33;
+}
+
+.alertText .alert_bottom {
+    font-size: .65rem;
+    line-height: 1.4rem;
+    color: #b3b3b3
 }

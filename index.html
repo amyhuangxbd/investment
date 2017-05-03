@@ -25,12 +25,15 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="./assets/js/ie-emulation-modes-warning.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -73,188 +76,47 @@
                   <label for="name" class ="control-label col-sm-3">选择日期</label>
               <div class="col-sm-5">
                   <span class="fontawesome-calendar"></span>
-                  <input type="name" name="myDate" class="form-control monthYearPicker" />
+                  <input type="name" id="myDate" name="myDate" class="form-control monthYearPicker" />
+                  <span class="help-block text-warning"></span>
               </div>
                 </div>
                <div class="form-group">
                   <label for="address" class ="control-label col-sm-3">上传文件</label>
               <div class="col-sm-3">
-                  <input name="fileUpload" id="fileUpload" class="form-control file-chooser__input" type="file">
+                  <input name="fileUpload" id="fileUpload" class="form-control file-chooser__input" type="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                  <span class="help-block text-warning"></span>
               </div>
                 </div>
                <div class="form-group">
                   <label for="email" class ="control-label col-sm-3">发送邮箱</label>
               <div class="col-sm-5">
                   <input type="email" class="form-control" id="email" placeholder="Enter email">
+                  <span class="help-block text-warning"></span>
               </div>
                 </div>
                <div class="form-group">
                   <label for="pwd" class ="control-label col-sm-3">邮箱密码</label>
               <div class="col-sm-5">
                   <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+                  <span class="help-block text-warning"></span>
               </div>
                 </div>
                <div class="col-sm-offset-2 col-sm-8">
-                 <button class="btn btn-default" id="save">保存</button>
-                 <button class="btn btn-default" id="browse">浏览</button>
-                 <button class="btn btn-default"  id="submit">发送</button>
+                 <button class="btn btn-primary" id="save">保存</button>
+                 <button class="btn btn-info" id="browse">浏览</button>
+                 <button class="btn btn-warning"  id="submit">发送</button>
                </div>
             </div>
           </div>
 
-          <label for="myDate">Date :</label>
-          <input name="myDate" class="monthYearPicker" />
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </div>
 
-          <h2 class="sub-header">Section title</h2>
           <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>libero</td>
-                  <td>Sed</td>
-                  <td>cursus</td>
-                  <td>ante</td>
-                </tr>
-                <tr>
-                  <td>1,004</td>
-                  <td>dapibus</td>
-                  <td>diam</td>
-                  <td>Sed</td>
-                  <td>nisi</td>
-                </tr>
-                <tr>
-                  <td>1,005</td>
-                  <td>Nulla</td>
-                  <td>quis</td>
-                  <td>sem</td>
-                  <td>at</td>
-                </tr>
-                <tr>
-                  <td>1,006</td>
-                  <td>nibh</td>
-                  <td>elementum</td>
-                  <td>imperdiet</td>
-                  <td>Duis</td>
-                </tr>
-                <tr>
-                  <td>1,007</td>
-                  <td>sagittis</td>
-                  <td>ipsum</td>
-                  <td>Praesent</td>
-                  <td>mauris</td>
-                </tr>
-                <tr>
-                  <td>1,008</td>
-                  <td>Fusce</td>
-                  <td>nec</td>
-                  <td>tellus</td>
-                  <td>sed</td>
-                </tr>
-                <tr>
-                  <td>1,009</td>
-                  <td>augue</td>
-                  <td>semper</td>
-                  <td>porta</td>
-                  <td>Mauris</td>
-                </tr>
-                <tr>
-                  <td>1,010</td>
-                  <td>massa</td>
-                  <td>Vestibulum</td>
-                  <td>lacinia</td>
-                  <td>arcu</td>
-                </tr>
-                <tr>
-                  <td>1,011</td>
-                  <td>eget</td>
-                  <td>nulla</td>
-                  <td>Class</td>
-                  <td>aptent</td>
-                </tr>
-                <tr>
-                  <td>1,012</td>
-                  <td>taciti</td>
-                  <td>sociosqu</td>
-                  <td>ad</td>
-                  <td>litora</td>
-                </tr>
-                <tr>
-                  <td>1,013</td>
-                  <td>torquent</td>
-                  <td>per</td>
-                  <td>conubia</td>
-                  <td>nostra</td>
-                </tr>
-                <tr>
-                  <td>1,014</td>
-                  <td>per</td>
-                  <td>inceptos</td>
-                  <td>himenaeos</td>
-                  <td>Curabitur</td>
-                </tr>
-                <tr>
-                  <td>1,015</td>
-                  <td>sodales</td>
-                  <td>ligula</td>
-                  <td>in</td>
-                  <td>libero</td>
-                </tr>
-              </tbody>
-            </table>
+
+          <div style="padding: 10px; " id="table-container">
+              <br>
+              
+          </div>
           </div>
         </div>
       </div>
@@ -278,6 +140,68 @@
           </div>
         </div>
       </div>
+
+      <div class="overlay overlay_table hidden" id="overlay_table">
+        <div class="popup popup_table">
+          <table id="table"
+                 data-toggle="table"
+                 data-url="http://yintechjdhr.jdcf88.com/H5_server/api/SendEmail/GetPromoteList"
+                 data-query-params="queryParams"
+                 data-response-handler="responseHandler"
+                 data-pagination="true"
+                 data-side-pagination="server"
+                 data-page-list="[5, 10, 20, 50, 100, 200]"
+                 data-search="true">
+              <thead>
+              <tr>
+                  <!-- <th data-field="state" data-checkbox="true"></th>
+                  <th data-field="id" data-align="right" data-sortable="true">Item ID</th>
+                  <th data-field="name" data-align="center" data-sortable="true">Item Name</th>
+                  <th data-field="price" data-sortable="true">Item Price</th> -->
+                  <th data-field="email" >邮箱</th>
+                  <th data-field="name" >投顾姓名</th>
+                  <th data-field="departmentcode" >部门</th>
+                  <th data-field="type" >类别</th>
+                  <th data-field="position" width="200" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现岗位&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th data-field="intime" data-formatter="dateFormatter" >入组日期</th>
+                  <th data-field="rank" >当月新单排名</th>
+                  <th data-field="inmoney" >累计新单入金</th>
+                  <th data-field="dyjzpm" >当月净值排名</th>
+                  <th data-field="dyyxjz" >当月有效净值</th>
+                  <th data-field="whljyj" >维护累计佣金</th>
+                  <th data-field="flag" >当月排名是否前50%</th>
+                  <th data-field="active" >晋级/维持/降级</th>
+                  <th data-field="lastposition" >&nbsp;&nbsp;调整后岗位&nbsp;&nbsp;</th>
+              </tr>
+              </thead>
+          </table>
+        </div>
+      </div>
+
+      <div class='alertTip' id="alertTip">
+        <div class='alertText'>
+          <div class='alert_icon'><span class='glyphicon glyphicon-ok'></span></div><h3></h3>
+        </div>
+      </div>
+
+      <div class="loader loader--style1" title="0">
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+        <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+          s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+          c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+        <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+          C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml"
+            attributeName="transform"
+            type="rotate"
+            from="0 20 20"
+            to="360 20 20"
+            dur="0.5s"
+            repeatCount="indefinite"/>
+          </path>
+        </svg>
+      </div>
     </div>
 
     <!-- Bootstrap core JavaScript
@@ -291,6 +215,7 @@
     <script src="./assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="./assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.js"></script>
     <script>
       $(function() {
   $('.monthYearPicker').datepicker({
@@ -317,6 +242,20 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
   });
 });
       $(document).ready(function(){
+        $('#overlay_table').click(function(e){
+          if (e.target.id === 'overlay_table') {
+            $(this).addClass("hidden")
+          }
+        });
+
+        // 浏览 button invisible
+        $("#browse").css("display", "none")
+        var oToday = new Date()
+        var sTodayMonth = oToday.getMonth() + 1
+        sTodayMonth = sTodayMonth < 10 ? ("0"+sTodayMonth) : sTodayMonth
+        var sDate = sTodayMonth + "/" + oToday.getFullYear()
+        $("#myDate").val(sDate)
+
         var token = localStorage.getItem("token")
         if (token) {
           $("#overlay").css("display", "none")
@@ -351,7 +290,6 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
             return;
           }
           var formData = {'name': sName, 'password': sPassword};
-          $('.loader').css("display", "block");
           var that = this
           var url = 'http://yintechjdhr.jdcf88.com/H5_server/api/User/UserLogin2?name=' + sName + '&pwd=' + sPassword
           $.ajax({    
@@ -384,12 +322,45 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
             $("#overlay").css("display", "")
         })
 
+        $(".form-horizontal .form-group input").blur(function(){
+          var oParent = $(this).parent()
+            var oFileFormGroup = oParent.parent()
+            var oSpan = oParent.find( "span" ).html("")
+            oFileFormGroup.removeClass( "has-error" )
+        })
+
         $("#save").click(function(evt){
           evt.preventDefault();
-          var sDate = "04/2017"
-          var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/Excel/savefile?datetime=2017/04'
+          var count = 0
+          var aFiles = $('#fileUpload')[0].files
+          if (aFiles.length === 0) {
+            var oParent = $('#fileUpload').parent()
+            var oFileFormGroup = oParent.parent()
+            var oSpan = oParent.find( "span.text-warning" ).html("文件不能为空！")
+            oFileFormGroup.addClass( "has-error" )
+
+            count++
+          }
+          if ($("#myDate").val() === "") {
+            var oParent = $('#myDate').parent()
+            var oFileFormGroup = oParent.parent()
+            var oSpan = oParent.find( "span.text-warning" ).html("日期不能为空！")
+            oFileFormGroup.addClass( "has-error" )
+
+            count++
+          }
+          if (count > 0) {
+            return
+          }
+          $(".loader").css("display", "block")
+          var sDate = $("#myDate").val()
+          if (sDate.indexOf("/") > -1) {
+            var aArr = sDate.split("/")
+            sDate = aArr[1] + "/" + aArr[0]
+          }
+          var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/Excel/savefile?datetime='+sDate
           var formData = new FormData();
-          formData.append('file', $('#fileUpload')[0].files[0]);
+          formData.append('file', aFiles[0]);
           $.ajax({
               url: sUrl,
               type: 'POST',
@@ -398,9 +369,33 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
               processData: false,
               contentType: false
           }).done(function(res) {
-            alert(res)
+            $(".loader").css("display", "none")
+            if (res.success && res.message) {
+              $("#alertTip").css("display", "block");
+              $("#alertTip").find(".alert_icon").removeClass("error");
+              $("#alertTip").find(".glyphicon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
+              $("#alertTip").find("h3").html(res.message);
+              // show 浏览 btn and invisible 保存 btn
+              $("#browse").css("display", "");
+              $("#save").css("display", "none");
+            } else {
+              $("#alertTip").css("display", "block");
+              $("#alertTip").find(".alert_icon").addClass("error");
+              $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+              $("#alertTip").find("h3").html(res.message);
+            }
+            setTimeout(function(){
+              $("#alertTip").css("display", "none");
+            }, 1500)
           }).fail(function(res) {
-            alert(res)
+            $(".loader").css("display", "none")
+            $("#alertTip").css("display", "block");
+            $("#alertTip").find(".alert_icon").addClass("error");
+            $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+            $("#alertTip").find("h3").html(res)
+            setTimeout(function(){
+              $("#alertTip").css("display", "none");
+            }, 1500)
           });
         })
 
@@ -420,21 +415,104 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 
         $("#browse").click(function(evt){
           evt.preventDefault();
-          var sDate = "04/2017"
-          var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/SendEmail/GetPromoteList?token='+ localStorage.getItem('token')
-          var formData = {'pageIndex': '0', 'pageSize': '10'};
-          $.ajax({
-              url: sUrl,
-              type: 'POST',
-              data: formData
-          }).done(function(res) {
-            alert(res)
-          }).fail(function(res) {
-            alert(res)
-          });
+          $("#overlay_table").removeClass("hidden")
+          var $table = $('#table')
+          $table.bootstrapTable('refresh');
+          // var sDate = "04/2017"
+          // var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/SendEmail/GetPromoteList?token='+ localStorage.getItem('token')
+          // var formData = {'pageIndex': '0', 'pageSize': '10'};
+          // $.ajax({
+          //     url: sUrl,
+          //     type: 'POST',
+          //     data: formData
+          // }).done(function(res) {
+          //   debugger;
+          //   var response = res
+          //   var datas = response.data
+          //   if (response.success && Object.prototype.toString.call( datas ) === '[object Array]') {
+          //     $(function () {
+          //         $( "#table-container" ).empty()
+          //         $( "#table-container" ).html("<table id='table' data-show-columns='true' data-pagination='true' data-side-pagination='server'><thead><tr><th data-field='email' >邮箱</th> <th data-field='name' >投顾姓名</th><th data-field='departmentcode' >部门</th> <th data-field='type' >类别</th><th data-field='position' >现岗位</th> <th data-field='intime' >入组日期</th><th data-field='rank' >当月新单排名</th><th data-field='inmoney' >累计新单入金</th><th data-field='dyjzpm' >当月净值排名</th><th data-field='dyyxjz' >当月有效净值</th><th data-field='whljyj' >维护累计佣金</th><th data-field='flag' >当月排名是否前50%</th><th data-field='active' >晋级/维持/降级</th><th data-field='lastposition' >调整后岗位</th></tr></thead> </table>")
+
+          //         $('#table').bootstrapTable({
+          //             data: datas,
+          //             totalRows: res.total,
+          //             onPageChange: function (number, size) {
+          //               // debugger
+          //               //   alert("number: " + number + "; size: " + size)
+          //               var sDate = "04/2017"
+          //               var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/SendEmail/GetPromoteList?token='+ localStorage.getItem('token')
+          //               var formData = {'pageIndex': '1', 'pageSize': '10'};
+          //               $.ajax({
+          //                   url: sUrl,
+          //                   type: 'POST',
+          //                   data: formData
+          //               }).done(function(res) {
+          //                 debugger;
+          //                 var response = res
+          //                 var datas = response.data
+          //                 if (response.success && Object.prototype.toString.call( datas ) === '[object Array]') {
+          //                   $('#table').bootstrapTable('load', datas)
+          //                 }
+          //                 // alert(res)
+          //               }).fail(function(res) {
+          //                 alert(res)
+          //               });
+          //             },
+          //         });
+
+          //     });
+          //   }
+          //   // alert(res)
+          // }).fail(function(res) {
+          //   alert(res)
+          // });
         })
 
       })
+var pageIndex = 0
+var pageSize = 10
+$(function () {
+  $('#table').on('load-success.bs.table', function () {
+
+    // alert($('#table').bootstrapTable('getOptions').totalRows)
+  })
+})
+
+
+function queryParams() {
+ var oOptions = $('#table').bootstrapTable('getOptions')
+    if (oOptions.pageNumber) {
+      pageIndex = oOptions.pageNumber - 1
+      pageSize = oOptions.pageSize
+    }
+    
+    return {
+        token: localStorage.getItem('token'),
+        pageIndex: pageIndex,
+        pageSize: pageSize
+    };
+}
+
+function dateFormatter(value, row, index) {
+  if (!value) {
+    return value;
+  }
+  var oDate = new Date(value)
+  var sYear = oDate.getFullYear()
+  var sMonth = oDate.getMonth() + 1
+  var sDay = oDate.getDate()
+  return sYear + "/" + sMonth + "/" + sDay;
+}
+
+function responseHandler(res) {
+  if (!res.success) {
+    $(".overlay_table").css("display", "none")
+    $("#overlay").css("display", "")
+  }
+  return res;
+}
+
 
     </script>
   </body>
