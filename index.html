@@ -52,8 +52,8 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a id="login_link" class="login_link">登录</a></li>
-            <li><a href="./login.html" class="login_suc hidden">修改密码</a></li>
-            <li><a href="#" class="login_suc hidden">退出</a></li>
+            <li><a href="#" class="login_suc hidden" id="modify_pwd">修改密码</a></li>
+            <li><a href="#" class="login_suc hidden" id="logout">退出</a></li>
           </ul>
         </div>
       </div>
@@ -141,6 +141,28 @@
         </div>
       </div>
 
+      <div class="overlay" id="overlay_modifypwd">
+        <div class="popup">
+          <h1>金兜财富</h1>
+          <div id="modifypwd_form" class="login_form">
+            <div id="modifypwd_msg" class="error_msg"></div>
+            <div class="login_row ">
+              <span class="icon_oldpass"></span>
+              <input type="password" value="" id="modifypwd_oldpwd" class="login_input name" placeholder="请输入原始密码"></div>
+            <div class="error_msg"></div>
+            <div class="login_row">
+              <span class="icon_pass"></span>
+              <input type="password" value="" id="modifypwd_newpwd" class="login_input password" placeholder="请输入新密码"></div>
+            <div class="error_msg"></div>
+            <div class="login_row">
+              <span class="icon_pass"></span>
+              <input type="password" value="" id="modifypwd_newpwd2" class="login_input password" placeholder="确认新密码"></div>
+            <div class="error_msg"></div>
+            <input id="modifypwd_submit" type="button" class="login_submit" value="提交">
+          </div>
+        </div>
+      </div>
+
       <div class="overlay overlay_table hidden" id="overlay_table">
         <div class="popup popup_table">
           <table id="table"
@@ -181,6 +203,17 @@
       <div class='alertTip' id="alertTip">
         <div class='alertText'>
           <div class='alert_icon'><span class='glyphicon glyphicon-ok'></span></div><h3></h3>
+        </div>
+      </div>
+      
+      <div class="overlay overlay_modify_text" id="overlay_modify_text">
+        <div class="popup" >
+          <div class="popupText">
+            <div class="popup_icon"><span class="glyphicon glyphicon-ok"></span></div><h3>密码修改成功</h3>
+          </div>
+          <div class="popup_footer"><span id="secondcount"></span><span>s后自动跳转到</span><a href="#" id="redirect_login">
+                登录页面
+              </a></div>
         </div>
       </div>
 
@@ -242,6 +275,183 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
   });
 });
       $(document).ready(function(){
+        $("#overlay_modify_text").css("display", "none")
+        $("#overlay_modifypwd").css("display", "none")
+        $("#modifypwd_submit").click(function(e){
+          e.preventDefault()
+          e.stopPropagation()
+          var oldpass = $("#modifypwd_oldpwd")
+          var newpass = $("#modifypwd_newpwd")
+          var newpass2 = $("#modifypwd_newpwd2")
+          var count = 0
+          if (!oldpass.val()) {
+            $("#modifypwd_msg").html('请输入原始密码')
+            count++
+          }
+          if (!newpass.val()) {
+            $("#modifypwd_msg").html('请输入新密码')
+            count++
+          }
+          if (!newpass2.val()) {
+            $("#modifypwd_msg").html('请确认新密码')
+            count++
+          }
+          if (newpass.val() !== newpass2.val()) {
+            $("#modifypwd_msg").html('请确认新密码')
+            count++
+          }
+          if (count > 0) {
+            return
+          }
+
+          var that = this
+          var token = localStorage.getItem('token')
+          $.ajax({    
+            url: 'http://yintechjdhr.jdcf88.com/H5_server/api/User/SetUserPwd', // 跳转到 action    
+            data: {pwd: oldpass.val(), newpwd: newpass.val(), 'token': token},    
+            type: 'post',
+            cache: false,    
+            success: function(data) {   
+              if (data.success && Object.prototype.toString.call( data.data ) === '[object Object]' && data.data.status) {
+                $("#overlay_modifypwd").css("display", "none")
+                $("#overlay_modify_text").css("display", "")
+
+                var second = 3
+                $("#secondcount").html(second)
+                var timer = null
+                timer = window.setInterval(function() {
+                  $("#secondcount").html(second)
+                  if (second > 0) {
+                    second--
+                    
+                  } else {
+                    window.clearInterval(timer)
+                    localStorage.removeItem("token")
+                    $("#overlay").css("display", "")
+                    $("#overlay_modifypwd").css("display", "none")
+                    $("#overlay_modify_text").css("display", "none")
+
+                    $("#login_link").parent().css("display", "")
+                    $(".login_suc").addClass( "hidden" )
+
+
+                  }
+                }, 1000)
+              } else {
+                if (Object.prototype.toString.call( data.data ) !== '[object Object]') {
+                  $("#modifypwd_msg").html(data.message || data.data)
+                } else {
+                  $("#modifypwd_msg").html(data.data.msg)
+                }
+                
+              }
+              // if (data.data.status) {
+              //   that.setState({
+              //     showForm: false,
+              //     secondcount: 3
+              //   })
+              //   var timer = null
+              //   timer = window.setInterval(function() {
+              //     let second = that.state.secondcount
+              //     if (second > 0) {
+              //       second--
+              //       that.setState({
+              //         secondcount: second
+              //       })
+              //     } else {
+              //       window.clearInterval(timer)
+              //       that.context.router.replace('/recruit/login')
+
+              //     }
+              //   }, 1000)
+                
+              // } else {
+              //   that.setState({
+              //     showForm: true,
+              //     msg: data.data.msg
+              //   })
+              // }
+            },    
+            error: function() {
+            }    
+          })
+        })
+
+        $("#redirect_login").click(function(e){
+          e.preventDefault()
+          e.stopPropagation()
+          $("#overlay_modify_text").css("display", "none")
+          $("#overlay").css("display", "block")
+        })
+
+        $("#modify_pwd").click(function(e){
+          e.preventDefault()
+          e.stopPropagation()
+          $("#overlay_modifypwd").css("display", "block")
+        })
+
+        $("#logout").click(function(e){
+          e.preventDefault()
+          e.stopPropagation()
+          var that = this
+          var url = 'http://yintechjdhr.jdcf88.com/H5_server/api/User/SetUserPwd'
+          $.ajax({    
+            url: url,   
+            type: 'POST',
+            cache: false,    
+            success: function(data) {
+              if (data.success && data.data) {
+                localStorage.removeItem("token")
+                $("#overlay").css("display", "block")
+                $("#login_link").parent().css("display", "")
+                $(".login_suc").addClass( "hidden" )
+              } else {
+                $("#alertTip").css("display", "block");
+                $("#alertTip").find(".alert_icon").addClass("error");
+                $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+                $("#alertTip").find("h3").html(data.message);
+              }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              $("#alertTip").css("display", "block");
+                $("#alertTip").find(".alert_icon").addClass("error");
+                $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+                $("#alertTip").find("h3").html(thrownError);
+            }    
+          })
+        })
+
+        $("#logout").click(function(e){
+          e.preventDefault()
+          e.stopPropagation()
+          var that = this
+          var url = 'http://yintechjdhr.jdcf88.com/H5_server/api/User/LoginOut?token=' + localStorage.getItem("token")
+          $.ajax({    
+            url: url,   
+            type: 'get',
+            cache: false,    
+            success: function(data) {
+              if (data.success && data.data) {
+                localStorage.removeItem("token")
+                $("#overlay").css("display", "block")
+                $("#login_link").parent().css("display", "")
+                $(".login_suc").addClass( "hidden" )
+              } else {
+                $("#alertTip").css("display", "block");
+                $("#alertTip").find(".alert_icon").addClass("error");
+                $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+                $("#alertTip").find("h3").html(data.message);
+              }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+              $("#alertTip").css("display", "block");
+                $("#alertTip").find(".alert_icon").addClass("error");
+                $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+                $("#alertTip").find("h3").html(thrownError);
+            }    
+          })
+        })
+
         $('#overlay_table').click(function(e){
           if (e.target.id === 'overlay_table') {
             $(this).addClass("hidden")
@@ -266,6 +476,13 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
           e.preventDefault()
           e.stopPropagation()
           if (e.target.id === 'overlay') {
+            $(this).css("display", "none")
+          }
+        })
+        $("#overlay_modifypwd").click(function(e){
+          e.preventDefault()
+          e.stopPropagation()
+          if (e.target.id === 'overlay_modifypwd') {
             $(this).css("display", "none")
           }
         })
@@ -454,7 +671,12 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
               $("#alertTip").find(".alert_icon").removeClass("error");
               $("#alertTip").find(".glyphicon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
               $("#alertTip").find("h3").html(res.data);
-
+              $("#fileUpload").val("")
+              $("#email").val("")
+              $("#pwd").val("")
+              $("#browse").css("display", "none");
+              $("#save").css("display", "");
+              $("#submit").prop('disabled', true);
             } else {
               $("#alertTip").css("display", "block");
               $("#alertTip").find(".alert_icon").addClass("error");
@@ -480,7 +702,7 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
           evt.preventDefault();
           $("#overlay_table").removeClass("hidden")
           var $table = $('#table')
-          $table.bootstrapTable('refresh');
+          $table.bootstrapTable('refresh', {pageNumber: 1, pageSize: 10});
           // var sDate = "04/2017"
           // var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/SendEmail/GetPromoteList?token='+ localStorage.getItem('token')
           // var formData = {'pageIndex': '0', 'pageSize': '10'};
