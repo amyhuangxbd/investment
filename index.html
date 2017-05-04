@@ -203,6 +203,7 @@
       <div class='alertTip' id="alertTip">
         <div class='alertText'>
           <div class='alert_icon'><span class='glyphicon glyphicon-ok'></span></div><h3></h3>
+          <a href="#0" class="cd-popup-close img-replace" id="alertTip_close">Close</a>
         </div>
       </div>
       
@@ -458,6 +459,12 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
           }
         });
 
+        $('#alertTip').click(function(e){
+          if (e.target.id === 'alertTip_close') {
+            $("#alertTip").css("display", "none");
+          }
+        });
+
         // 浏览 button invisible
         $("#browse").css("display", "none")
         var oToday = new Date()
@@ -528,6 +535,8 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
                 $("#overlay").css("display", "none")
                 $("#login_link").parent().css("display", "none")
                 $(".login_suc").removeClass( "hidden" )
+              } else {
+                $("#login_msg").html(data.message)
               }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -683,18 +692,18 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
               $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
               $("#alertTip").find("h3").html(res.message);
             }
-            setTimeout(function(){
-              $("#alertTip").css("display", "none");
-            }, 1500)
+            // setTimeout(function(){
+            //   $("#alertTip").css("display", "none");
+            // }, 1500)
           }).fail(function(res) {
             $(".loader").css("display", "none")
             $("#alertTip").css("display", "block");
             $("#alertTip").find(".alert_icon").addClass("error");
             $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $("#alertTip").find("h3").html(res)
-            setTimeout(function(){
-              $("#alertTip").css("display", "none");
-            }, 1500)
+            // setTimeout(function(){
+            //   $("#alertTip").css("display", "none");
+            // }, 1500)
           });
         })
 
@@ -792,7 +801,7 @@ function dateFormatter(value, row, index) {
 
 function responseHandler(res) {
   if (!res.success) {
-    $(".overlay_table").css("display", "none")
+    $(".overlay_table").addClass("hidden")
     $("#overlay").css("display", "")
   }
   return res;
