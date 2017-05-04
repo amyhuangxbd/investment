@@ -355,7 +355,6 @@ body {
   text-align: center;
   padding: 1em;
   margin: 0 auto 1em;
-  display: none;
 }
 svg {
     margin-top: 200px;
@@ -366,7 +365,6 @@ svg rect{
 }
 
 .alertTip {
-  display: none;
     position: fixed;
     top: 0;
     bottom: 0;

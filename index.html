@@ -123,7 +123,7 @@
     </div>
 
     <div>
-      <div class="overlay" id="overlay">
+      <div class="overlay hidden" id="overlay">
         <div class="popup">
           <h1>金兜财富</h1>
           <div id="form" class="login_form">
@@ -141,7 +141,7 @@
         </div>
       </div>
 
-      <div class="overlay" id="overlay_modifypwd">
+      <div class="overlay hidden" id="overlay_modifypwd">
         <div class="popup">
           <h1>金兜财富</h1>
           <div id="modifypwd_form" class="login_form">
@@ -200,14 +200,14 @@
         </div>
       </div>
 
-      <div class='alertTip' id="alertTip">
+      <div class='alertTip hidden' id="alertTip">
         <div class='alertText'>
           <div class='alert_icon'><span class='glyphicon glyphicon-ok'></span></div><h3></h3>
           <a href="#0" class="cd-popup-close img-replace" id="alertTip_close">Close</a>
         </div>
       </div>
       
-      <div class="overlay overlay_modify_text" id="overlay_modify_text">
+      <div class="overlay overlay_modify_text hidden" id="overlay_modify_text">
         <div class="popup" >
           <div class="popupText">
             <div class="popup_icon"><span class="glyphicon glyphicon-ok"></span></div><h3>密码修改成功</h3>
@@ -218,7 +218,7 @@
         </div>
       </div>
 
-      <div class="loader loader--style1" title="0">
+      <div class="loader loader--style1 hidden" title="0">
         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
          width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
         <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
@@ -276,8 +276,8 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
   });
 });
       $(document).ready(function(){
-        $("#overlay_modify_text").css("display", "none")
-        $("#overlay_modifypwd").css("display", "none")
+        $("#overlay_modify_text").addClass("hidden")
+        $("#overlay_modifypwd").addClass("hidden")
         $("#modifypwd_submit").click(function(e){
           e.preventDefault()
           e.stopPropagation()
@@ -314,8 +314,9 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
             cache: false,    
             success: function(data) {   
               if (data.success && Object.prototype.toString.call( data.data ) === '[object Object]' && data.data.status) {
-                $("#overlay_modifypwd").css("display", "none")
-                $("#overlay_modify_text").css("display", "")
+                $("#overlay_modifypwd").addClass("hidden")
+
+                $("#overlay_modify_text").removeClass("hidden")
 
                 var second = 3
                 $("#secondcount").html(second)
@@ -328,11 +329,11 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
                   } else {
                     window.clearInterval(timer)
                     localStorage.removeItem("token")
-                    $("#overlay").css("display", "")
-                    $("#overlay_modifypwd").css("display", "none")
-                    $("#overlay_modify_text").css("display", "none")
+                    $("#overlay").removeClass("hidden")
+                    $("#overlay_modifypwd").addClass("hidden")
+                    $("#overlay_modify_text").addClass("hidden")
 
-                    $("#login_link").parent().css("display", "")
+                    $("#login_link").parent().removeClass("hidden")
                     $(".login_suc").addClass( "hidden" )
 
 
@@ -381,14 +382,14 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
         $("#redirect_login").click(function(e){
           e.preventDefault()
           e.stopPropagation()
-          $("#overlay_modify_text").css("display", "none")
-          $("#overlay").css("display", "block")
+          $("#overlay_modify_text").addClass("hidden")
+          $("#overlay").removeClass("hidden")
         })
 
         $("#modify_pwd").click(function(e){
           e.preventDefault()
           e.stopPropagation()
-          $("#overlay_modifypwd").css("display", "block")
+          $("#overlay_modifypwd").removeClass("hidden")
         })
 
         $("#logout").click(function(e){
@@ -403,18 +404,18 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
             success: function(data) {
               if (data.success && data.data) {
                 localStorage.removeItem("token")
-                $("#overlay").css("display", "block")
-                $("#login_link").parent().css("display", "")
+                $("#overlay").removeClass("hidden")
+                $("#login_link").parent().removeClass("hidden")
                 $(".login_suc").addClass( "hidden" )
               } else {
-                $("#alertTip").css("display", "block");
+                $("#alertTip").removeClass("hidden");
                 $("#alertTip").find(".alert_icon").addClass("error");
                 $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
                 $("#alertTip").find("h3").html(data.message);
               }
             },
             error: function(xhr, ajaxOptions, thrownError) {
-              $("#alertTip").css("display", "block");
+              $("#alertTip").removeClass("hidden");
                 $("#alertTip").find(".alert_icon").addClass("error");
                 $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
                 $("#alertTip").find("h3").html(thrownError);
@@ -434,18 +435,18 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
             success: function(data) {
               if (data.success && data.data) {
                 localStorage.removeItem("token")
-                $("#overlay").css("display", "block")
-                $("#login_link").parent().css("display", "")
+                $("#overlay").removeClass("hidden")
+                $("#login_link").parent().removeClass("hidden")
                 $(".login_suc").addClass( "hidden" )
               } else {
-                $("#alertTip").css("display", "block");
+                $("#alertTip").removeClass("hidden");
                 $("#alertTip").find(".alert_icon").addClass("error");
                 $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
                 $("#alertTip").find("h3").html(data.message);
               }
             },
             error: function(xhr, ajaxOptions, thrownError) {
-              $("#alertTip").css("display", "block");
+              $("#alertTip").removeClass("hidden");
                 $("#alertTip").find(".alert_icon").addClass("error");
                 $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
                 $("#alertTip").find("h3").html(thrownError);
@@ -461,12 +462,12 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 
         $('#alertTip').click(function(e){
           if (e.target.id === 'alertTip_close') {
-            $("#alertTip").css("display", "none");
+            $("#alertTip").addClass("hidden");
           }
         });
 
         // 浏览 button invisible
-        $("#browse").css("display", "none")
+        $("#browse").addClass("hidden")
         var oToday = new Date()
         var sTodayMonth = oToday.getMonth() + 1
         sTodayMonth = sTodayMonth < 10 ? ("0"+sTodayMonth) : sTodayMonth
@@ -475,30 +476,30 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 
         var token = localStorage.getItem("token")
         if (token) {
-          $("#overlay").css("display", "none")
-          $("#login_link").parent().css("display", "none")
+          $("#overlay").addClass("hidden")
+          $("#login_link").parent().addClass("hidden")
           $(".login_suc").removeClass( "hidden" )
         }
         $("#overlay").click(function(e){
           e.preventDefault()
           e.stopPropagation()
           if (e.target.id === 'overlay') {
-            $(this).css("display", "none")
+            $(this).addClass("hidden")
           }
         })
         $("#overlay_modifypwd").click(function(e){
           e.preventDefault()
           e.stopPropagation()
           if (e.target.id === 'overlay_modifypwd') {
-            $(this).css("display", "none")
+            $(this).addClass("hidden")
           }
         })
 
         $("#fileUpload").change(function(e){
           $("#submit").prop('disabled', true);
           // show 浏览 btn and invisible 保存 btn
-          $("#browse").css("display", "none");
-          $("#save").css("display", "");
+          $("#browse").addClass("hidden");
+          $("#save").removeClass("hidden");
         })
 
         $("#login_submit").click(function(){
@@ -532,8 +533,8 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
                 var oData = data.data
                 localStorage.setItem("name", oData.name)
                 localStorage.setItem("token", oData.token)
-                $("#overlay").css("display", "none")
-                $("#login_link").parent().css("display", "none")
+                $("#overlay").addClass("hidden")
+                $("#login_link").parent().addClass("hidden")
                 $(".login_suc").removeClass( "hidden" )
               } else {
                 $("#login_msg").html(data.message)
@@ -552,7 +553,7 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
 
         $("#login_link").on('click', function(event) {
             event.preventDefault();
-            $("#overlay").css("display", "")
+            $("#overlay").removeClass("hidden")
         })
 
         $(".form-horizontal .form-group input").blur(function(){
@@ -585,7 +586,7 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
           if (count > 0) {
             return
           }
-          $(".loader").css("display", "block")
+          $(".loader").removeClass("hidden")
           var sDate = $("#myDate").val()
           if (sDate.indexOf("/") > -1) {
             var aArr = sDate.split("/")
@@ -602,33 +603,33 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
               processData: false,
               contentType: false
           }).done(function(res) {
-            $(".loader").css("display", "none")
+            $(".loader").addClass("hidden")
             if (res.success && res.message) {
-              $("#alertTip").css("display", "block");
+              $("#alertTip").removeClass("hidden");
               $("#alertTip").find(".alert_icon").removeClass("error");
               $("#alertTip").find(".glyphicon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
               $("#alertTip").find("h3").html(res.message);
               // show 浏览 btn and invisible 保存 btn
-              $("#browse").css("display", "");
-              $("#save").css("display", "none");
+              $("#browse").removeClass("hidden");
+              $("#save").addClass("hidden");
               $("#submit").prop('disabled', false)
             } else {
-              $("#alertTip").css("display", "block");
+              $("#alertTip").removeClass("hidden");
               $("#alertTip").find(".alert_icon").addClass("error");
               $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
               $("#alertTip").find("h3").html(res.message);
             }
             setTimeout(function(){
-              $("#alertTip").css("display", "none");
+              $("#alertTip").addClass("hidden");
             }, 1500)
           }).fail(function(res) {
-            $(".loader").css("display", "none")
-            $("#alertTip").css("display", "block");
+            $(".loader").addClass("hidden")
+            $("#alertTip").removeClass("hidden");
             $("#alertTip").find(".alert_icon").addClass("error");
             $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $("#alertTip").find("h3").html(res)
             setTimeout(function(){
-              $("#alertTip").css("display", "none");
+              $("#alertTip").addClass("hidden");
             }, 1500)
           });
         })
@@ -668,41 +669,41 @@ var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
           if (count > 0) {
             return
           }
-          $(".loader").css("display", "block")
+          $(".loader").removeClass("hidden")
           var sUrl = 'http://yintechjdhr.jdcf88.com/H5_server/api/SendEmail/send?token='+ localStorage.getItem("token") + '&emailAcount=' + oEmail.val() + '&emailPassword=' + oPassword.val();
           $.ajax({
               url: sUrl,
               type: 'get',
           }).done(function(res) {
-            $(".loader").css("display", "none")
+            $(".loader").addClass("hidden")
             if (res.success && res.message) {
-              $("#alertTip").css("display", "block");
+              $("#alertTip").removeClass("hidden");
               $("#alertTip").find(".alert_icon").removeClass("error");
               $("#alertTip").find(".glyphicon").removeClass("glyphicon-remove").addClass("glyphicon-ok");
               $("#alertTip").find("h3").html(res.data);
               $("#fileUpload").val("")
               $("#email").val("")
               $("#pwd").val("")
-              $("#browse").css("display", "none");
-              $("#save").css("display", "");
+              $("#browse").addClass("hidden");
+              $("#save").removeClass("hidden");
               $("#submit").prop('disabled', true);
             } else {
-              $("#alertTip").css("display", "block");
+              $("#alertTip").removeClass("hidden");
               $("#alertTip").find(".alert_icon").addClass("error");
               $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
               $("#alertTip").find("h3").html(res.message);
             }
             // setTimeout(function(){
-            //   $("#alertTip").css("display", "none");
+            //   $("#alertTip").addClass("hidden");
             // }, 1500)
           }).fail(function(res) {
-            $(".loader").css("display", "none")
-            $("#alertTip").css("display", "block");
+            $(".loader").addClass("hidden")
+            $("#alertTip").removeClass("hidden");
             $("#alertTip").find(".alert_icon").addClass("error");
             $("#alertTip").find(".glyphicon").removeClass("glyphicon-ok").addClass("glyphicon-remove");
             $("#alertTip").find("h3").html(res)
             // setTimeout(function(){
-            //   $("#alertTip").css("display", "none");
+            //   $("#alertTip").addClass("hidden");
             // }, 1500)
           });
         })
@@ -802,7 +803,7 @@ function dateFormatter(value, row, index) {
 function responseHandler(res) {
   if (!res.success) {
     $(".overlay_table").addClass("hidden")
-    $("#overlay").css("display", "")
+    $("#overlay").removeClass("hidden")
   }
   return res;
 }
