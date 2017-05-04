@@ -334,8 +334,8 @@ svg rect{
 }
 
 .alertText {
-    width: 300px;
-    height: 300px;
+    width: 360px;
+    height: 320px;
     margin-top: calc(100vh / 2 - 120px);
     margin-left: auto;
     margin-right: auto;
@@ -379,4 +379,11 @@ svg rect{
     font-size: .65rem;
     line-height: 1.4rem;
     color: #b3b3b3
+}
+.form-group {
+  margin-bottom: 5px;
+}
+.help-block.text-warning {
+  margin-top: 0;
+  margin-bottom: 0;
 }
